@@ -1,0 +1,34 @@
+                                                            ASSIGNMENT 2
+
+1. Created a form having fields - first name, last name, gender(radio button), Date of Birth(datepicker), select role(dropdown - developer, tester, manager, team leader), skills(checkboxes - Java, NodeJs, React, Angular, Android), About employee(Text area max 300 characters)															
+2. Appllied proper validations and shown error message															
+3. Added loader after submitting form															
+4. Shown added record in table and success/error message to end user															
+5. Shown delete and update actions in Actions column															
+6. Updated record should display in table															
+7. In backend employeeId should get generate automatically and use this for update and delete record
+
+
+Used Json-server for backend 
+
+
+To Run a Project follow below steps
+Start two powershell
+In first run project localhost:4200/  http://localhost:4200/
+
+In second powershell start json server
+command : json-server --watch db.json 
+Resources
+  http://localhost:3000/registerEmployee
+
+Home
+  http://localhost:3000
+
+
+
+Used Angular Material for making form and Table
+Command : ng add @angular/material
+
+Used bootstrap Framework
+Command : npm install --save bootstrap  
+Updated in angular.json

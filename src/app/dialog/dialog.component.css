@@ -1,0 +1,24 @@
+.mat
+{
+
+    color: white;
+   height: 4%
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-form-field
+  {
+    width: 100%;
+
+  }
+  .my-dialog {
+  width: 100% !important;
+  padding: 20px !important;
+
+    overflow: auto;
+
+  }
+ 

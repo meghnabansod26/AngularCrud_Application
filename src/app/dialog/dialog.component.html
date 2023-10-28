@@ -1,0 +1,181 @@
+<!-- Heading Container -->
+<div class="container my-dialog">
+  <div class="row justify-content-center pt-6">
+    <div class="col-md-10">
+      <div
+        class="text-center text-white p-2"
+        style="background-color: rgb(9, 9, 68)"
+        mat-dialog-content
+      >
+        Employee Details
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form  -->
+<form [formGroup]="registerForm">
+
+  <!-- First Name and Last Name  -->
+  <div class="row justify-content-center pt-2">
+    <div class="col-md-5">
+      <mat-form-field appearance="outline" class="display-block">
+        <mat-label>First name</mat-label>
+        <input matInput id="fname" formControlName="FirstName" required />
+        <mat-error *ngIf="registerForm.get('FirstName')?.hasError('required')"
+          >First Name is required</mat-error
+        >
+        <mat-error *ngIf="registerForm.get('FirstName')?.hasError('pattern')"
+          >First Name should contain only letters</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-5">
+      <mat-form-field appearance="outline" class="display-block">
+        <mat-label>Last name</mat-label>
+        <input matInput id="lname" formControlName="LastName" required />
+        <mat-error *ngIf="registerForm.get('LastName')?.hasError('required')"
+          >Last Name is required</mat-error
+        >
+        <mat-error *ngIf="registerForm.get('LastName')?.hasError('pattern')"
+          >Last Name should contain only letters</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Gender -->
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <mat-radio-group formControlName="Gender" class="example-radio-group">
+        <mat-label>Gender :</mat-label>
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let gender of genderList"
+          [value]="gender"
+        >
+          {{ gender }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <mat-error
+        class="error-message"
+        *ngIf="registerForm.controls['Gender'].errors"
+        >Please select a gender.</mat-error
+      >
+    </div>
+  </div>
+
+
+  <!-- Skills -->
+  <div class="row justify-content-center pt-2">
+    <div class="col-md-10">
+      <div formGroupName="skills">
+        <div class="example-sections" [formGroup]="skills">
+          <mat-label>Skills : </mat-label>
+          <mat-checkbox formControlName="java">Java</mat-checkbox>
+          <mat-checkbox formControlName="nodejs">NodeJs</mat-checkbox>
+          <mat-checkbox formControlName="angular">Angular</mat-checkbox>
+          <mat-checkbox formControlName="react">React</mat-checkbox>
+          <mat-checkbox formControlName="android">Android</mat-checkbox>
+
+          <mat-error
+            *ngIf="registerForm.get('skills')?.hasError('skillRequired')"
+            >Please select at least one skill</mat-error
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Date -->
+  <div class="row justify-content-center pt-2">
+    <div class="col-md-10">
+      <mat-form-field appearance="fill" class="display-block">
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="date"
+          required=""
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <!-- Role -->
+  <div class="row justify-content-center pt-2">
+    <div class="col-md-10">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Role</mat-label>
+        <mat-select formControlName="Role">
+          <mat-option *ngFor="let Role of roles" [value]="Role.value">
+            {{ Role.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          class="error-message"
+          *ngIf="registerForm.controls['Role'].errors"
+        >
+          Role is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <!-- Employee -->
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <mat-form-field class="example-full-width">
+        <mat-label>About Employee</mat-label>
+        <textarea
+          matInput
+          placeholder="Write here.."
+          formControlName="AboutEmployee"
+        ></textarea>
+        <mat-hint align="end"
+          >{{
+            registerForm.controls["AboutEmployee"].value?.length || 0
+          }}/30</mat-hint
+        >
+        <mat-error
+          *ngIf="registerForm.controls['AboutEmployee'].hasError('maxlength')"
+        >
+          About employee should not exceed 30 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <button
+        mat-raised-button
+        (click)="registerUser()"
+        color="primary"
+        class="text-white"
+        [disabled]="registerForm.invalid || isLoading"
+        style="background-color: rgb(9, 9, 68)"
+      >
+        <mat-progress-spinner
+          *ngIf="isLoading"
+          mode="indeterminate"
+        ></mat-progress-spinner
+        >{{ actionBtn }}
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    </div>
+  </div>
+</form>
